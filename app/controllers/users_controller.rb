@@ -26,25 +26,13 @@ class UsersController < ApplicationController
   
   # POST /users (+params)
   def create
-    # (@user + given params).save
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      #UserMailer.account_activation(@user).deliver_now
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
-      #success
-      #log_in @user
-      #flash[:success] = "Welcom to the Sample App!"
-      # GET "users/#{@user.id}"
-      #redirect_to @user
-      # redirect_to user_path(@user)
-      # redirect_to user_path(@user.id)
-      # redirect_to user_path(1) => /users/1      
     else
-      #failure
       render 'new'
-    # => name, email, pass/confirmation
     end
   end
   
